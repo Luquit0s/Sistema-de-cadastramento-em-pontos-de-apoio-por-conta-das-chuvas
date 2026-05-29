@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head> <!-- Parte invisível -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Gov.br</title>
+    <link rel="stylesheet" href="CSS/gov.css"/>
+    <link rel="icon" type="image/png" sizes="48x48" href="./Imagem/icon.gov.png">
+
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <img src="https://sso.acesso.gov.br/assets/govbr/img/govbr.png" alt="Logo Gov.br">
+    </header>
+
+    <!-- Conteúdo -->
+    <div class="container">
+
+        <!-- Imagem -->
+        <div class="imagem">
+            <img src="https://sso.acesso.gov.br/assets/govbr/img/conta_govbr_v2.jpg" alt="Imagem Gov.br">
+        </div>
+
+        <!-- Login -->
+        <div class="card">
+
+            <h2>Identifique-se</h2>
+
+            <p>Digite seu CPF para acessar ou criar sua conta gov.br</p>
+
+            <form id="loginForm">
+
+                <label for="cpf">CPF</label>
+
+                <input type="text"
+                    id="cpf"
+                    placeholder="Digite seu CPF">
+
+                <button type="submit">Continuar</button>
+
+            </form> 
+
+        </div>
+
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        &copy; 2026 Página ilustrativa - Sistema Gov.br
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("loginForm");
+    const input = document.getElementById("cpf");
+
+    // opcional: preencher se já existir
+    const cpfSalvo = localStorage.getItem("cpf_usuario");
+    if (cpfSalvo) {
+        input.value = cpfSalvo;
+    }
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const cpf = input.value.trim();
+
+        if (!cpf) {
+            alert("Digite o CPF.");
+            return;
+        }
+
+        localStorage.setItem("cpf_usuario", cpf);
+
+        window.location.href = "senha.html";
+    });
+});
+</script>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head> <!-- Parte invisível -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Gov.br</title>
+    <link rel="stylesheet" href="css/senha.css"/>
+    <link rel="icon" type="image/png" sizes="48x48" href="./Imagem/icon.gov.png">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <img src="https://sso.acesso.gov.br/assets/govbr/img/govbr.png" alt="Logo Gov.br">
+    </header>
+
+    <!-- Conteúdo -->
+    <div class="container">
+
+        <!-- Imagem -->
+        <div class="imagem">
+            <img src="https://sso.acesso.gov.br/assets/govbr/img/senha.png" alt="Imagem Gov.br">
+        </div>
+
+        <!-- Login -->
+        <div class="card">
+
+            <h2>Digite sua senha</h2>
+
+            <label>CPF: <span id="cpfExibido"></span></label>
+
+            <form>
+
+                <label for="senha">Senha</label>
+
+                <input type="password"
+                    id="senha"
+                    placeholder="Digite sua senha"
+                    aria-invalid="false">
+
+                <button id="entrar" type="button">Entrar</button>
+                <button id="cancelar" type="button">Cancelar</button>
+
+                <div class="esqueci">
+                    <a href="#">Esqueci minha senha</a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        &copy; 2026 Página ilustrativa - Sistema Gov.br
+    </footer>
+</body>
+</html>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const cpf = localStorage.getItem("cpf_usuario");
+
+    // se não tiver CPF, volta para login
+    if (!cpf) {
+        window.location.href = "gov.html";
+        return;
+    }
+
+    // exibe CPF
+    const cpfEl = document.getElementById("cpfExibido");
+    if (cpfEl) {
+        cpfEl.textContent = cpf;
+    }
+
+    // botão entrar
+    const entrarBtn = document.getElementById("entrar");
+    if (entrarBtn) {
+        entrarBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.location.href = "cadastro.html";
+        });
+    }
+
+    // botão cancelar
+    const cancelarBtn = document.getElementById("cancelar");
+    if (cancelarBtn) {
+        cancelarBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.location.href = "gov.html";
+        });
+    }
+
+});
+</script>

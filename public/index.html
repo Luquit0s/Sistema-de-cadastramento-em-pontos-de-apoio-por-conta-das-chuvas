@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Apoio e Abrigos - Recife</title>
+    <link rel="stylesheet" href="CSS/estilo.css">
+
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="hero-content">
+            <h1>Cadastro de Abrigos e Apoio</h1>
+            <p>Sistema de apoio para pessoas afetadas pelas fortes chuvas no Recife.</p>
+            <div class="buttons">
+                <button class="cadastro" onclick="goTogov()">Realizar Cadastro</button>
+                <button class="abrigo">Encontrar Abrigo</button>
+                <button class="ajuda">Solicitar Ajuda</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ESTATÍSTICAS -->
+    <section class="stats-section">
+        <div class="cards">
+            <div class="card">
+                <h2>1.247</h2>
+                <p>Vagas Disponíveis</p>
+            </div>
+
+            <div class="card">
+                <h2>3.892</h2>
+                <p>Pessoas Cadastradas</p>
+            </div>
+
+            <div class="card">
+                <h2>199</h2>
+                <p>Defesa Civil</p>
+            </div>
+
+            <div class="card">
+                <h2>48</h2>
+                <p>Áreas de Risco</p>
+            </div>
+        </div>
+    </section>
+   
+    <!-- ALERTAS -->
+    <section class="alerts-section">
+        <div class="container">
+            <!-- ALERTA VERMELHO -->
+            <div class="alert alert-error">
+                <div class="alert-content">
+                    <h3 class="alert-title">Alerta de Chuvas Fortes - Nível Vermelho</h3>
+                    <p class="alert-text"> Previsão de chuvas intensas nas próximas 24 horas. Evite áreas de risco e procure abrigos seguros se necessário.</p>
+                    <p class="alert-detail"><strong>Áreas mais afetadas:</strong> Zona Norte, Zona Oeste e áreas de morros.</p>
+                </div>
+            </div>
+
+            <!-- ALERTA LARANJA -->
+            <div class="alert alert-warning">
+                <div class="alert-content">
+                    <h3 class="alert-title">Orientações de Segurança</h3>
+                    <ul class="alert-list">
+                        <li>Evite atravessar áreas alagadas</li>
+                        <li>Desligue aparelhos eletrônicos da tomada</li>
+                        <li>Mantenha documentos em local seguro e seco</li>
+                        <li>Em caso de emergência, ligue 193 (Bombeiros) ou 199 (Defesa Civil)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAPA -->
+
+    <section class="map-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mapa de Abrigos e Áreas de Risco</h2>
+                <p class="section-subtitle">Visualize os abrigos disponíveis e as áreas de risco no Recife</p>
+            </div>
+
+            <div class="map-container">
+
+                <!-- LEGENDA -->
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <div class="marker marker-shelter"></div>
+                        <span>Abrigos</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <div class="marker marker-risk-high"></div>
+                        <span>Área de Risco Alto</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <div class="marker marker-risk-medium"></div>
+                        <span>Área de Risco Médio</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <div class="marker marker-user"></div>
+                        <span>Sua localização</span>
+                    </div>
+                </div>
+
+                <!-- MAPA -->
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATOS EMERGENCIAIS -->
+
+    <div class="section-header">
+        <h2 class="section-title">Contatos Emergenciais</h2>
+        <p class="section-subtitle">Números importantes para situações de emergência</p>
+    </div>
+
+    <section class="contacts-section">
+        <div class="cards">
+            <div class="card">
+                <h2>Defesa Civil</h2>
+                <p>199</p>
+                <p>Emergências relacionadas a desastres naturais e situações de risco</p>
+            </div>
+
+            <div class="card">
+                <h2>SAMU</h2>
+                <p>192</p>
+                <p>Atendimento médico de urgência e emergência</p>
+            </div>
+
+            <div class="card">
+                <h2>Bombeiros</h2>
+                <p>193</p>
+                <p>Combate a incêndios, resgates e salvamentos</p>
+            </div>
+
+            <div class="card">
+                <h2>COMPESA</h2>
+                <p>0800 081 0195</p>
+                <p>Emergências relacionadas a água e esgoto</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- COMO FUNCIONA -->
+
+    <section class="how-it-works-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Como Funciona</h2>
+                <p class="section-subtitle">Entenda o processo de cadastramento e acolhimento em abrigos seguros</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="marker-number">
+                        <h3>1</h3>
+                    </div>
+                    <p>Cadastro</p>
+                    <p>Realize seu cadastro informando seus dados pessoais,número de familiares e necessidades especiais</p>
+                </div>
+
+                <div class="card">
+                    <div class="marker-number">
+                        <h3>2</h3>
+                    </div>
+                    <p>Localização</p>
+                    <p>O sistema identifica sua localização atual e verifica as áreas de risco próximas</p>
+                </div>
+
+                <div class="card">
+                    <div class="marker-number">
+                        <h3>3</h3>
+                    </div>
+                    <p>Abrigo Mais Próximo</p>
+                    <p>Encontramos o abrigo mais próximo com vagas disponíveis para você e sua família
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="marker-number">
+                        <h3>4</h3>
+                    </div>
+                    <p>Acolhimento</p>
+                    <p>Dirija-se ao abrigo indicado onde você receberá assistência, alimentação e cuidados necessários
+                    </p>
+                </div>
+            </div>
+    </section>
+
+    <!-- INFORMAÇÕES -->
+    <section class="info-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">O que você encontrará nos abrigos:</h2>
+            </div>
+
+            <div class="card">
+                <div class="grid">
+                    <ul>
+                        <li>Local seguro e protegido contra intempéries</li>
+                        <li>Alimentação e água potável</li>
+                        <li>Colchões e cobertores</li>
+                        <li>Atendimento médico básico</li>
+                    </ul>
+
+                    <ul>
+                        <li>Produtos de higiene pessoal</li>
+                        <li>Assistência social e psicológica</li>
+                        <li>Área para crianças</li>
+                        <li>Segurança 24 horas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        &copy; 2026 Sistema de Apoio e Abrigos - Prefeitura do Recife
+        <p style="color: #6b7280; font-size: 14px;"> Em caso de emergência, ligue 199 (Defesa Civil) ou 193 (Bombeiros)</p>
+    </footer>
+</body> 
+</html>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    setupButtons();
+    initMap();
+});
+
+/* =========================
+   BOTÕES
+========================= */
+function setupButtons() {
+
+    const cadastroBtn = document.querySelector('.cadastro');
+    const abrigoBtn = document.querySelector('.abrigo');
+    const ajudaBtn = document.querySelector('.ajuda');
+
+    if (cadastroBtn) {
+        cadastroBtn.addEventListener('click', goTogov);
+    }
+
+    if (abrigoBtn) {
+        abrigoBtn.addEventListener('click', () => {
+            document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    if (ajudaBtn) {
+        ajudaBtn.addEventListener('click', () => {
+            alert("Emergência:\n199 Defesa Civil\n193 Bombeiros\n192 SAMU");
+        });
+    }
+}
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+function goTogov() {
+    window.location.href = "gov.html";
+}
+
+/* =========================
+   MAPA
+========================= */
+function initMap() {
+
+    if (typeof L === 'undefined') return;
+
+    const map = L.map('map').setView([-8.0476, -34.8770], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    const shelters = [
+        { name: "Escola Recife", lat: -8.05, lng: -34.88 },
+        { name: "Ginásio Central", lat: -8.06, lng: -34.87 }
+    ];
+
+    shelters.forEach(s => {
+        L.marker([s.lat, s.lng])
+            .addTo(map)
+            .bindPopup(s.name);
+    });
+
+    L.circleMarker([-8.0476, -34.8770], {
+        radius: 8
+    }).addTo(map).bindPopup("Você está aqui");
+}
+</script>

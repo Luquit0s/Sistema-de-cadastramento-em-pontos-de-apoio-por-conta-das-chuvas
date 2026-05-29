@@ -14,6 +14,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Middlewares obrigatórios
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // <-- ADICIONE ESSA AQUI para os formulários
+
+// Servir os arquivos estáticos do front-end (HTML, CSS, Imagens)
+app.use(express.static('public'));
 
 // Rota de teste: Quando ela acessar http://localhost:3000/api/status vai ver essa mensagem
 app.get('/api/status', (req, res) => {

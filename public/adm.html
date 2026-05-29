@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="CSS/adm.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="hero-content">
+            <h1>Painel Administrativo</h1>
+            <p>
+                Gerencie abrigos, vagas disponíveis, ocupação e pedidos
+                de acolhimento.
+            </p>
+
+            <div class="buttons">
+                <button class="blue">Adicionar Abrigo</button>
+                <button class="green">Atualizar Dados</button>
+                <button class="outline">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- VISÃO GERAL -->
+    <section>
+        <div class="container">
+
+            <div class="title">
+                <h2>Visão Geral</h2>
+                <p>Resumo do sistema</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="number">2</div>
+                    <div class="label">Total de Abrigos</div>
+                </div>
+
+                <div class="card">
+                    <div class="number">320</div>
+                    <div class="label">Capacidade Total</div>
+                </div>
+
+                <div class="card">
+                    <div class="number">260</div>
+                    <div class="label">Total Ocupados</div>
+                </div>
+
+                <div class="card">
+                    <div class="number">60</div>
+                    <div class="label">Vagas Disponíveis</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TABELA -->
+    <section>
+        <div class="container">
+
+            <div class="title">
+                <h2>Abrigos Cadastrados</h2>
+                <p>Gerencie os abrigos</p>
+
+                <input type="text" placeholder="Buscar abrigo...">
+            </div>
+
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Abrigo</th>
+                            <th>Endereço</th>
+                            <th>Capacidade</th>
+                            <th>Ocupados</th>
+                            <th>Disponíveis</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Escola Municipal Recife</td>
+                            <td>Boa Vista</td>
+                            <td>200</td>
+                            <td>150</td>
+                            <td>50</td>
+                            <td><span class="badge green">Disponível</span></td>
+                            <td class="actions">
+                                <button class="small blue">Editar</button>
+                                <button class="small red">Excluir</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Ginásio Central</td>
+                            <td>Casa Amarela</td>
+                            <td>120</td>
+                            <td>110</td>
+                            <td>10</td>
+                            <td><span class="badge orange">Limitado</span></td>
+                            <td class="actions">
+                                <button class="small blue">Editar</button>
+                                <button class="small red">Excluir</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PEDIDOS -->
+    <section>
+        <div class="container">
+
+            <div class="title">
+                <h2>Sistema de Pedidos</h2>
+                <p>Solicitações recebidas</p>
+            </div>
+
+            <div class="request">
+                <div>
+                    <h3>Maria Fátima da Silva</h3>
+                    <p>3 familiares • Abrigo imediato</p>
+                </div>
+                <span class="badge orange">Prioridade 1</span>
+            </div>
+
+            <div class="request">
+                <div>
+                    <h3>Márcio Antônio Calhado</h3>
+                    <p>Situação de risco extremo</p>
+                </div>
+                <span class="badge red">URGENTE</span>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Sistema de Abrigos - Recife
+        <p>Emergência: 199 / 193</p>
+    </footer>
+
+</body>
+</html>
+
+<script>
+
+    console.log("JS conectado com sucesso");
+    
+    console.log("JS CARREGOU CORRETAMENTE");
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    initializeButtons();
+    initializeSearch();
+    initializeTableActions();
+    initializeStatsAnimation();
+
+});
+
+// =====================================
+// BOTÕES
+// =====================================
+
+function initializeButtons() {
+
+    const addBtn = document.querySelector('.blue');
+    const updateBtn = document.querySelector('.green');
+    const exitBtn = document.querySelector('.outline');
+
+    if(addBtn) {
+        addBtn.addEventListener('click', () => {
+
+            const name = prompt('Nome do abrigo:');
+            if(!name) return;
+
+            const address = prompt('Endereço:');
+            if(!address) return;
+
+            const capacity = parseInt(prompt('Capacidade:'));
+            if(isNaN(capacity)) return;
+
+            addShelter(name, address, capacity);
+
+        });
+    }
+
+    if(updateBtn) {
+        updateBtn.addEventListener('click', () => {
+            updateCards();
+            alert('Dados atualizados.');
+        });
+    }
+
+    if(exitBtn) {
+        exitBtn.addEventListener('click', () => {
+            const ok = confirm('Sair do sistema?');
+            if(ok) window.location.href = 'index.html';
+        });
+    }
+
+}
+
+// =====================================
+// ADICIONAR ABRIGO
+// =====================================
+
+function addShelter(name, address, capacity) {
+
+    const tbody = document.querySelector('tbody');
+    if(!tbody) return;
+
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${address}</td>
+        <td>${capacity}</td>
+        <td>0</td>
+        <td>${capacity}</td>
+        <td><span class="badge green">Disponível</span></td>
+        <td class="actions">
+            <button class="small blue">Editar</button>
+            <button class="small red">Excluir</button>
+        </td>
+    `;
+
+    tbody.appendChild(row);
+
+    initializeTableActions();
+    updateCards();
+
+}
+
+// =====================================
+// TABELA
+// =====================================
+
+function initializeTableActions() {
+
+    document.querySelectorAll('.small.red').forEach(btn => {
+        btn.onclick = function () {
+            this.closest('tr').remove();
+            updateCards();
+        };
+    });
+
+    document.querySelectorAll('.small.blue').forEach(btn => {
+        btn.onclick = function () {
+            const row = this.closest('tr');
+
+            const name = prompt('Editar nome:', row.children[0].textContent);
+            if(!name) return;
+
+            const address = prompt('Editar endereço:', row.children[1].textContent);
+            if(!address) return;
+
+            const cap = parseInt(prompt('Editar capacidade:', row.children[2].textContent));
+            if(isNaN(cap)) return;
+
+            const occ = parseInt(prompt('Ocupados:', row.children[3].textContent));
+            if(isNaN(occ)) return;
+
+            row.children[0].textContent = name;
+            row.children[1].textContent = address;
+            row.children[2].textContent = cap;
+            row.children[3].textContent = occ;
+            row.children[4].textContent = cap - occ;
+
+            updateCards();
+        };
+    });
+
+}
+
+// =====================================
+// BUSCA
+// =====================================
+
+function initializeSearch() {
+
+    const input = document.querySelector('input[type="text"]');
+    if(!input) return;
+
+    input.addEventListener('input', () => {
+
+        const value = input.value.toLowerCase();
+
+        document.querySelectorAll('tbody tr').forEach(row => {
+
+            const name = row.children[0].textContent.toLowerCase();
+            const address = row.children[1].textContent.toLowerCase();
+
+            row.style.display =
+                name.includes(value) || address.includes(value)
+                ? ''
+                : 'none';
+
+        });
+
+    });
+
+}
+
+// =====================================
+// CARDS
+// =====================================
+
+function updateCards() {
+
+    const rows = document.querySelectorAll('tbody tr');
+
+    let total = rows.length;
+    let cap = 0;
+    let occ = 0;
+    let avail = 0;
+
+    rows.forEach(r => {
+        cap += parseInt(r.children[2].textContent);
+        occ += parseInt(r.children[3].textContent);
+        avail += parseInt(r.children[4].textContent);
+    });
+
+    const nums = document.querySelectorAll('.number');
+
+    if(nums.length >= 4) {
+        nums[0].textContent = total;
+        nums[1].textContent = cap;
+        nums[2].textContent = occ;
+        nums[3].textContent = avail;
+    }
+
+}
+
+// =====================================
+// ANIMAÇÃO
+// =====================================
+
+function initializeStatsAnimation() {
+
+    document.querySelectorAll('.number').forEach(el => {
+
+        const end = parseInt(el.textContent);
+
+        let start = 0;
+        const duration = 800;
+        const startTime = performance.now();
+
+        function animate(time) {
+
+            const progress = Math.min((time - startTime) / duration, 1);
+            el.textContent = Math.floor(progress * end);
+
+            if(progress < 1) requestAnimationFrame(animate);
+
+        }
+
+        requestAnimationFrame(animate);
+
+    });
+
+}
+
+</script>

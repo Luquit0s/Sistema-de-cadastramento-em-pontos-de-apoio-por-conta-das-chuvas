@@ -18,15 +18,18 @@ cd *****
 ```
 
 ## Como rodar o Servidor
+cd pra entrar na pasta
 
 ```
-##########
+npm install
+node index.js
 ```
 
 ## Para acessar a tela principal
 
 ```
-http://000000000/
+http://localhost:3000/index.html
+http://localhost:3000/api/status
 ```
 
 ## Linguagems Utilizadas
