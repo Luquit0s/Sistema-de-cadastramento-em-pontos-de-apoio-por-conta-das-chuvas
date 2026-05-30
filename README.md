@@ -7,7 +7,7 @@ Para baixar e rodar este projeto você precisa de:
 
 - Python (3.12 ou superior)
 - Node.js (versão 24.16.0 ou superior)
-- Git (apenas se haver necessidade de clonar o repositório via terminal)
+- Git (2.40 ou superior) -apenas se haver necessidade de clonar o repositório via terminal
 - NPM (gerenciador de pacotes instalado junto com o Node)
    
 ## Como rodar o Servidor
