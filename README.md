@@ -34,7 +34,7 @@ Com o servidor rodando, abra seu navegador e acesse:
 ## Linguagems Utilizadas
 - Javascript (Backend e Frontend)
 - HTML5 (Estruturação da tela prrincipal)
-- CSS3 (Estilização da Interface
+- CSS3 (Estilização da Interface)
 
 ## Frameworks e Bibliotecas Utilizadas
 
