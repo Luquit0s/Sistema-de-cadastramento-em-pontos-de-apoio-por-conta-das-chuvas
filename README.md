@@ -3,35 +3,41 @@
 Projeto 
 
 ## Requisitos
+Para baixar e rodar este projeto você precisa de:
 
-- Python 3.12 ou superior
--
--
-
-   Se haver uma necessidade de clonar o projeto para analisar o codigo mais afundo utilizando alguma plataforma de programação, use o GitHub
-
-No terminal de controle do da plaformade programação coloque:
+- Python (3.12 ou superior)
+- Node.js (versão 24.16.0 ou superior)
+- Git (apenas se haver necessidade de clonar o repositório via terminal)
+- NPM (gerenciador de pacotes instalado junto com o Node)
+   
+## Como rodar o Servidor
+Caso tenha baixado o arquivo ZIP, extraia-o. Se preferir clonar via GitHub, abra o terminal e digite:
 
 ```
 git clone <url-do-repositorio>
-cd *****
+cd CRUD-Pontos-Apoio
 ```
-
-## Como rodar o Servidor
-cd pra entrar na pasta
+Instale as dependências necessárias e inicie o servidor:
 
 ```
 npm install
 node index.js
 ```
-
 ## Para acessar a tela principal
+Com o servidor rodando, abra seu navegador e acesse:
 
 ```
-http://localhost:3000/index.html
-http://localhost:3000/api/status
+- Tela principal: http://localhost:3000/index.html
+- Status da API: http://localhost:3000/api/status
 ```
 
 ## Linguagems Utilizadas
+- Javascript (Backend e Frontend)
+- HTML5 (Estruturação da tela prrincipal)
+- CSS3 (Estilização da Interface
 
-## Frameworks Utilizados
+## Frameworks e Bibliotecas Utilizadas
+
+- Node.js (Ambiente de execução)
+- Express (Framework backend para criação de API e rotas)
+
