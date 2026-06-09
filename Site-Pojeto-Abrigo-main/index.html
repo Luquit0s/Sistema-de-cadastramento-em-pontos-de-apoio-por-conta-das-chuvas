@@ -19,6 +19,7 @@
                 <button class="cadastro" onclick="goTogov()">Realizar Cadastro</button>
                 <button class="abrigo">Encontrar Abrigo</button>
                 <button class="ajuda">Solicitar Ajuda</button>
+                <button class="admin" onclick="goToAdmin()">Entrar como Administrador</button>
             </div>
         </div>
     </header>
@@ -37,40 +38,8 @@
             </div>
 
             <div class="card">
-                <h2>199</h2>
-                <p>Defesa Civil</p>
-            </div>
-
-            <div class="card">
                 <h2>48</h2>
                 <p>Áreas de Risco</p>
-            </div>
-        </div>
-    </section>
-   
-    <!-- ALERTAS -->
-    <section class="alerts-section">
-        <div class="container">
-            <!-- ALERTA VERMELHO -->
-            <div class="alert alert-error">
-                <div class="alert-content">
-                    <h3 class="alert-title">Alerta de Chuvas Fortes - Nível Vermelho</h3>
-                    <p class="alert-text"> Previsão de chuvas intensas nas próximas 24 horas. Evite áreas de risco e procure abrigos seguros se necessário.</p>
-                    <p class="alert-detail"><strong>Áreas mais afetadas:</strong> Zona Norte, Zona Oeste e áreas de morros.</p>
-                </div>
-            </div>
-
-            <!-- ALERTA LARANJA -->
-            <div class="alert alert-warning">
-                <div class="alert-content">
-                    <h3 class="alert-title">Orientações de Segurança</h3>
-                    <ul class="alert-list">
-                        <li>Evite atravessar áreas alagadas</li>
-                        <li>Desligue aparelhos eletrônicos da tomada</li>
-                        <li>Mantenha documentos em local seguro e seco</li>
-                        <li>Em caso de emergência, ligue 193 (Bombeiros) ou 199 (Defesa Civil)</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
@@ -84,71 +53,59 @@
                 <p class="section-subtitle">Visualize os abrigos disponíveis e as áreas de risco no Recife</p>
             </div>
 
-            <div class="map-container">
-
-                <!-- LEGENDA -->
-                <div class="map-legend">
-                    <div class="legend-item">
-                        <div class="marker marker-shelter"></div>
-                        <span>Abrigos</span>
-                    </div>
-
-                    <div class="legend-item">
-                        <div class="marker marker-risk-high"></div>
-                        <span>Área de Risco Alto</span>
-                    </div>
-
-                    <div class="legend-item">
-                        <div class="marker marker-risk-medium"></div>
-                        <span>Área de Risco Médio</span>
-                    </div>
-
-                    <div class="legend-item">
-                        <div class="marker marker-user"></div>
-                        <span>Sua localização</span>
-                    </div>
+            <!-- LEGENDA -->
+            <div class="map-legend">
+                <div class="legend-item">
+                    <div class="marker marker-shelter"></div>
+                    <span>Abrigos</span>
                 </div>
 
-                <!-- MAPA -->
-                <div id="map" class="map"></div>
+                <div class="legend-item">
+                    <div class="marker marker-risk-high"></div>
+                    <span>Área de Risco Alto</span>
+                </div>
+
+                <div class="legend-item">
+                    <div class="marker marker-risk-medium"></div>
+                    <span>Área de Risco Médio</span>
+                </div>
+
+                <div class="legend-item">
+                    <div class="marker marker-user"></div>
+                    <span>Sua localização</span>
+                </div>
+            </div>
+
+            <!-- MAPA DE ABRIGOS -->
+            <div class="map-image-container">
+                <img
+                    src="Imagem/mapa.png"
+                    alt="Mapa de Abrigos e Áreas de Risco"
+                    class="map-image">
             </div>
         </div>
     </section>
 
-    <!-- CONTATOS EMERGENCIAIS -->
+    <!-- MAPA METEOROLÓGICO -->
+            <section class="weather-section">
+                <div class="container">
 
-    <div class="section-header">
-        <h2 class="section-title">Contatos Emergenciais</h2>
-        <p class="section-subtitle">Números importantes para situações de emergência</p>
-    </div>
+                    <div class="section-header">
+                        <h2 class="section-title">Mapa Meteorológico</h2>
+                        <p class="section-subtitle">
+                            Monitoramento das condições climáticas e áreas com maior incidência de chuvas.
+                        </p>
+                    </div>
 
-    <section class="contacts-section">
-        <div class="cards">
-            <div class="card">
-                <h2>Defesa Civil</h2>
-                <p>199</p>
-                <p>Emergências relacionadas a desastres naturais e situações de risco</p>
-            </div>
+                    <div class="weather-container">
+                        <img
+                            src="imagem/meterologia.png"
+                            alt="Mapa Meteorológico"
+                            class="weather-image">
+                    </div>
 
-            <div class="card">
-                <h2>SAMU</h2>
-                <p>192</p>
-                <p>Atendimento médico de urgência e emergência</p>
-            </div>
-
-            <div class="card">
-                <h2>Bombeiros</h2>
-                <p>193</p>
-                <p>Combate a incêndios, resgates e salvamentos</p>
-            </div>
-
-            <div class="card">
-                <h2>COMPESA</h2>
-                <p>0800 081 0195</p>
-                <p>Emergências relacionadas a água e esgoto</p>
-            </div>
-        </div>
-    </section>
+                </div>
+            </section>
     
     <!-- COMO FUNCIONA -->
 
@@ -223,6 +180,41 @@
         </div>
     </section>
 
+    <!-- CONTATOS EMERGENCIAIS -->
+
+    <div class="section-header">
+        <h2 class="section-title">Contatos Emergenciais</h2>
+        <p class="section-subtitle">Números importantes para situações de emergência</p>
+    </div>
+
+    <section class="contacts-section">
+        <div class="cards">
+            <div class="card">
+                <h2>Defesa Civil</h2>
+                <p>199</p>
+                <p>Emergências relacionadas a desastres naturais e situações de risco</p>
+            </div>
+
+            <div class="card">
+                <h2>SAMU</h2>
+                <p>192</p>
+                <p>Atendimento médico de urgência e emergência</p>
+            </div>
+
+            <div class="card">
+                <h2>Bombeiros</h2>
+                <p>193</p>
+                <p>Combate a incêndios, resgates e salvamentos</p>
+            </div>
+
+            <div class="card">
+                <h2>COMPESA</h2>
+                <p>0800 081 0195</p>
+                <p>Emergências relacionadas a água e esgoto</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Rodapé -->
     <footer>
         &copy; 2026 Sistema de Apoio e Abrigos - Prefeitura do Recife
@@ -234,7 +226,6 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     setupButtons();
-    initMap();
 });
 
 /* =========================
@@ -251,10 +242,20 @@ function setupButtons() {
     }
 
     if (abrigoBtn) {
-        abrigoBtn.addEventListener('click', () => {
-            document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
+    abrigoBtn.addEventListener('click', () => {
+
+        const secaoMapa =
+            document.querySelector('.map-section');
+
+        if (secaoMapa) {
+            secaoMapa.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+    });
+}
 
     if (ajudaBtn) {
         ajudaBtn.addEventListener('click', () => {
@@ -263,11 +264,28 @@ function setupButtons() {
     }
 }
 
+function goToAdmin() {
+
+    const usuario = prompt("Usuário:");
+
+    const senha = prompt("Senha:");
+
+    if (
+        usuario === "adm" &&
+        senha === "12345678"
+    ) {
+        window.location.href = "adm.html";
+    }
+    else {
+        alert("Usuário ou senha inválidos.");
+    }
+}
+
 /* =========================
    NAVEGAÇÃO
 ========================= */
 function goTogov() {
-    window.location.href = "gov.html";
+    window.location.href = "cadastro.html";
 }
 
 /* =========================

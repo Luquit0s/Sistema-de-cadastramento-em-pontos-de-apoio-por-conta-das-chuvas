@@ -188,10 +188,24 @@ function initializeButtons() {
             const address = prompt('Endereço:');
             if(!address) return;
 
-            const capacity = parseInt(prompt('Capacidade:'));
-            if(isNaN(capacity)) return;
+            const capacity = parseInt(prompt('Capacidade total do abrigo:'));
+        if(isNaN(capacity) || capacity <= 0) {
+            alert("Capacidade inválida.");
+            return;
+        }
 
-            addShelter(name, address, capacity);
+        const occupied = parseInt(prompt('Ocupação atual:'));
+        if(isNaN(occupied) || occupied < 0) {
+            alert("Ocupação inválida.");
+            return;
+        }
+
+        if(occupied > capacity) {
+            alert("A ocupação não pode ser maior que a capacidade.");
+            return;
+        }
+
+        addShelter(name, address, capacity, occupied);
 
         });
     }
@@ -212,29 +226,81 @@ function initializeButtons() {
 
 }
 
+function obterStatusAbrigo(capacidade, ocupados) {
+
+    const disponiveis = capacidade - ocupados;
+
+    if (ocupados >= capacidade) {
+        return {
+            texto: "Lotado",
+            classe: "red"
+        };
+    }
+
+    const percentualOcupado =
+        (ocupados / capacidade) * 100;
+
+    if (percentualOcupado >= 80) {
+        return {
+            texto: "Limitado",
+            classe: "orange"
+        };
+    }
+
+    return {
+        texto: "Disponível",
+        classe: "green"
+    };
+}
+
 // =====================================
 // ADICIONAR ABRIGO
 // =====================================
 
-function addShelter(name, address, capacity) {
+function addShelter(name, address, capacity, occupied) {
+
+    if (occupied > capacity) {
+
+        alert(
+            "O número de ocupados não pode ser maior que a capacidade."
+        );
+
+        return;
+    }
 
     const tbody = document.querySelector('tbody');
-    if(!tbody) return;
 
-    const row = document.createElement('tr');
+    if (!tbody) return;
+
+    const status =
+        obterStatusAbrigo(capacity, occupied);
+
+    const available =
+        capacity - occupied;
 
     row.innerHTML = `
-        <td>${name}</td>
-        <td>${address}</td>
-        <td>${capacity}</td>
-        <td>0</td>
-        <td>${capacity}</td>
-        <td><span class="badge green">Disponível</span></td>
-        <td class="actions">
-            <button class="small blue">Editar</button>
-            <button class="small red">Excluir</button>
-        </td>
-    `;
+    <td>${name}</td>
+    <td>${address}</td>
+    <td>${capacity}</td>
+    <td>${occupied}</td>
+    <td>${available}</td>
+
+    <td>
+        <span class="badge ${status.classe}">
+            ${status.texto}
+        </span>
+    </td>
+
+    <td class="actions">
+        <button class="small blue">
+            Editar
+        </button>
+
+        <button class="small red">
+            Excluir
+        </button>
+    </td>
+`;
 
     tbody.appendChild(row);
 
@@ -269,14 +335,41 @@ function initializeTableActions() {
             const cap = parseInt(prompt('Editar capacidade:', row.children[2].textContent));
             if(isNaN(cap)) return;
 
-            const occ = parseInt(prompt('Ocupados:', row.children[3].textContent));
-            if(isNaN(occ)) return;
+            const occ = parseInt(
+                prompt(
+                    'Ocupados:',
+                    row.children[3].textContent
+                )
+            );
+
+            if (isNaN(occ)) return;
+
+            if (occ > cap) {
+
+                alert(
+                    "O número de ocupados não pode ser maior que a capacidade."
+                );
+
+                return;
+            }
+
+            const status =
+                obterStatusAbrigo(cap, occ);
+
+            const disponiveis =
+                cap - occ;
 
             row.children[0].textContent = name;
             row.children[1].textContent = address;
             row.children[2].textContent = cap;
             row.children[3].textContent = occ;
-            row.children[4].textContent = cap - occ;
+            row.children[4].textContent = disponiveis;
+
+            row.children[5].innerHTML = `
+                <span class="badge ${status.classe}">
+                    ${status.texto}
+                </span>
+            `;
 
             updateCards();
         };

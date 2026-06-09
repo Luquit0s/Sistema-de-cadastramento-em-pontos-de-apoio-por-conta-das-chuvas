@@ -35,9 +35,12 @@
 
                 <label for="senha">Senha</label>
 
-                <input type="password"
+                <input
+                    type="password"
                     id="senha"
                     placeholder="Digite sua senha"
+                    minlength="8"
+                    required
                     aria-invalid="false">
 
                 <button id="entrar" type="button">Entrar</button>
@@ -65,35 +68,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cpf = localStorage.getItem("cpf_usuario");
 
-    // se não tiver CPF, volta para login
+    // Se não existir CPF salvo, volta para a tela anterior
     if (!cpf) {
         window.location.href = "gov.html";
         return;
     }
 
-    // exibe CPF
-    const cpfEl = document.getElementById("cpfExibido");
-    if (cpfEl) {
-        cpfEl.textContent = cpf;
-    }
+    // Formata CPF
+    const cpfFormatado = cpf
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 
-    // botão entrar
+    // Exibe CPF formatado
+    document.getElementById("cpfExibido").textContent = cpfFormatado;
+
+    const senhaInput = document.getElementById("senha");
     const entrarBtn = document.getElementById("entrar");
-    if (entrarBtn) {
-        entrarBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            window.location.href = "cadastro.html";
-        });
-    }
-
-    // botão cancelar
     const cancelarBtn = document.getElementById("cancelar");
-    if (cancelarBtn) {
-        cancelarBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            window.location.href = "gov.html";
-        });
-    }
+
+    // Botão Entrar
+    entrarBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const senha = senhaInput.value.trim();
+
+        if (senha === "") {
+            alert("Digite sua senha.");
+            senhaInput.focus();
+            senhaInput.setAttribute("aria-invalid", "true");
+            return;
+        }
+
+        if (senha.length < 8) {
+            alert("A senha deve possuir pelo menos 8 caracteres.");
+            senhaInput.focus();
+            senhaInput.setAttribute("aria-invalid", "true");
+            return;
+        }
+
+        senhaInput.setAttribute("aria-invalid", "false");
+
+        window.location.href = "index.html";
+    });
+
+    // Remove estado de erro enquanto digita
+    senhaInput.addEventListener("input", () => {
+        senhaInput.setAttribute("aria-invalid", "false");
+    });
+
+    // Botão Cancelar
+    cancelarBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = "gov.html";
+    });
 
 });
 </script>
