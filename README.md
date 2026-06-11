@@ -14,8 +14,11 @@ Caso tenha baixado o arquivo ZIP, extraia-o. Se preferir clonar via GitHub, abra
 
 ```
 git clone <url-do-repositorio>
+```
+```
 cd Sistema-de-cadastramento-em-pontos-de-apoio-por-conta-das-chuvas
 ```
+
 Instale as dependências necessárias e inicie o servidor:
 
 * npm install
@@ -24,9 +27,13 @@ Instale as dependências necessárias e inicie o servidor:
 ## Para acessar a tela principal
 Com o servidor rodando, abra seu navegador e acesse:
 
+- Tela principal: 
 ```
-- Tela principal: http://localhost:3000/index.html
-- Status da API: http://localhost:3000/api/status
+http://localhost:3000/index.html
+```
+- Status da API: 
+```
+http://localhost:3000/api/status
 ```
 
 ## Linguagems Utilizadas
