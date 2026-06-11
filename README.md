@@ -5,7 +5,6 @@ Projeto
 ## Requisitos
 Para baixar e rodar este projeto você precisa de:
 
-- Python (3.12 ou superior)
 - Node.js (versão 24.16.0 ou superior)
 - Git (2.40 ou superior) -apenas se haver necessidade de clonar o repositório via terminal
 - NPM (gerenciador de pacotes instalado junto com o Node)
@@ -15,14 +14,13 @@ Caso tenha baixado o arquivo ZIP, extraia-o. Se preferir clonar via GitHub, abra
 
 ```
 git clone <url-do-repositorio>
-cd CRUD-Pontos-Apoio
+cd Sistema-de-cadastramento-em-pontos-de-apoio-por-conta-das-chuvas
 ```
 Instale as dependências necessárias e inicie o servidor:
 
-```
-npm install
-node index.js
-```
+* npm install
+* node index.js
+
 ## Para acessar a tela principal
 Com o servidor rodando, abra seu navegador e acesse:
 
@@ -32,12 +30,13 @@ Com o servidor rodando, abra seu navegador e acesse:
 ```
 
 ## Linguagems Utilizadas
-- Javascript (Backend e Frontend)
-- HTML5 (Estruturação da tela prrincipal)
-- CSS3 (Estilização da Interface)
+* Javascript (Backend e Frontend)
+* HTML5 (Estruturação da tela prrincipal)
+* CSS3 (Estilização da Interface)
 
 ## Frameworks e Bibliotecas Utilizadas
 
-- Node.js (Ambiente de execução)
-- Express (Framework backend para criação de API e rotas)
+* Node.js (Ambiente de execução)
+* Express (Framework backend para criação de API e rotas)
+*  Supabase SDK (Integração com o banco de dados e autenticação)
 
