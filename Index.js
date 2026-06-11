@@ -48,9 +48,9 @@ app.post('/api/centros', async (req, res) => {
 });
 
 // 2. ROTA PARA LISTAR TODOS OS CENTROS (READ)
-app.get('/api/centros', async (req, res) => {
+app.get('/api/abrigos', async (req, res) => {
   const { data, error } = await supabase
-    .from('centros_apoio')
+    .from('abrigo')
     .select('*');
 
   if (error) {
