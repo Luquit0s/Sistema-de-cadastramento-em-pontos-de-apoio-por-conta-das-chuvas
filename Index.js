@@ -28,33 +28,16 @@ app.get('/api/status', (req, res) => {
   });
 });
 
-// =================================================================================
-// ROTA DE DIAGNÓSTICO        -   CODIGO UTILIZADO PARA IDENTIFICAÇÃO
-//=================================================================================
-app.get('/api/onde-estou', (req, res) => {
-  const fs = require('fs');
-  try {
-    const arquivosNaRaiz = fs.readdirSync(__dirname);
-    res.json({
-      pasta_atual_do_servidor: __dirname,
-      arquivos_que_o_node_ve_aqui: arquivosNaRaiz
-    });
-  } catch (err) {
-    res.status(500).json({ erro: err.message });
-  }
-}); // Essa parte em si não é crucial para o projeto, mas é utilizado para identificar quais arquivos o Node estaria visualizando
-    // " http://localhost:3000/api/onde-estou " Digitando esse comando no navegador você vai ser redirecionado a uma região que estaria mostrando quais arquivos o Node acessa
-
 // ==========================================
 // ROTAS DO CRUD (CENTROS DE APOIO)
 // ==========================================
 
 // 1. ROTA PARA CADASTRAR UM CENTRO (CREATE)
-app.post('/api/centros', async (req, res) => {
+app.post('/api/abrigos', async (req, res) => { 
   const { nome, endereco, capacidade } = req.body;
 
   const { data, error } = await supabase
-    .from('centros_apoio') // Nome exato da tabela no Supabase
+    .from('abrigo') 
     .insert([{ nome, endereco, capacidade }])
     .select();
 
@@ -66,9 +49,9 @@ app.post('/api/centros', async (req, res) => {
 });
 
 // 2. ROTA PARA LISTAR TODOS OS CENTROS (READ)
-app.get('/api/centros', async (req, res) => {
+app.get('/api/abrigos', async (req, res) => {
   const { data, error } = await supabase
-    .from('centros_apoio')
+    .from('abrigo')
     .select('*');
 
   if (error) {
