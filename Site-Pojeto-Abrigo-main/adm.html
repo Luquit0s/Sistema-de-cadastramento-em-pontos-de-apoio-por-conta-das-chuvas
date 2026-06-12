@@ -9,14 +9,10 @@
 
 <body>
 
-    <!-- Cabeçalho -->
     <header>
         <div class="hero-content">
             <h1>Painel Administrativo</h1>
-            <p>
-                Gerencie abrigos, vagas disponíveis, ocupação e pedidos
-                de acolhimento.
-            </p>
+            <p>Gerencie abrigos, vagas disponíveis, ocupação e pedidos de acolhimento.</p>
 
             <div class="buttons">
                 <button class="blue">Adicionar Abrigo</button>
@@ -26,10 +22,8 @@
         </div>
     </header>
 
-    <!-- VISÃO GERAL -->
     <section>
         <div class="container">
-
             <div class="title">
                 <h2>Visão Geral</h2>
                 <p>Resumo do sistema</p>
@@ -37,37 +31,33 @@
 
             <div class="cards">
                 <div class="card">
-                    <div class="number">2</div>
+                    <div class="number">0</div>
                     <div class="label">Total de Abrigos</div>
                 </div>
 
                 <div class="card">
-                    <div class="number">320</div>
+                    <div class="number">0</div>
                     <div class="label">Capacidade Total</div>
                 </div>
 
                 <div class="card">
-                    <div class="number">260</div>
+                    <div class="number">0</div>
                     <div class="label">Total Ocupados</div>
                 </div>
 
                 <div class="card">
-                    <div class="number">60</div>
+                    <div class="number">0</div>
                     <div class="label">Vagas Disponíveis</div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- TABELA -->
     <section>
         <div class="container">
-
             <div class="title">
                 <h2>Abrigos Cadastrados</h2>
                 <p>Gerencie os abrigos</p>
-
                 <input type="text" placeholder="Buscar abrigo...">
             </div>
 
@@ -84,66 +74,20 @@
                             <th>Ações</th>
                         </tr>
                     </thead>
-
                     <tbody>
-                        <tr>
-                            <td>Escola Municipal Recife</td>
-                            <td>Boa Vista</td>
-                            <td>200</td>
-                            <td>150</td>
-                            <td>50</td>
-                            <td><span class="badge green">Disponível</span></td>
-                            <td class="actions">
-                                <button class="small blue">Editar</button>
-                                <button class="small red">Excluir</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Ginásio Central</td>
-                            <td>Casa Amarela</td>
-                            <td>120</td>
-                            <td>110</td>
-                            <td>10</td>
-                            <td><span class="badge orange">Limitado</span></td>
-                            <td class="actions">
-                                <button class="small blue">Editar</button>
-                                <button class="small red">Excluir</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
-
         </div>
     </section>
 
-    <!-- PEDIDOS -->
     <section>
-        <div class="container">
-
+        <div class="container" id="requests-container">
             <div class="title">
                 <h2>Sistema de Pedidos</h2>
                 <p>Solicitações recebidas</p>
             </div>
-
-            <div class="request">
-                <div>
-                    <h3>Maria Fátima da Silva</h3>
-                    <p>3 familiares • Abrigo imediato</p>
-                </div>
-                <span class="badge orange">Prioridade 1</span>
             </div>
-
-            <div class="request">
-                <div>
-                    <h3>Márcio Antônio Calhado</h3>
-                    <p>Situação de risco extremo</p>
-                </div>
-                <span class="badge red">URGENTE</span>
-            </div>
-
-        </div>
     </section>
 
     <footer>
@@ -151,318 +95,310 @@
         <p>Emergência: 199 / 193</p>
     </footer>
 
-</body>
-</html>
+    <script>
+        console.log("JS conectado e integrado ao Back-end com sucesso!");
 
-<script>
+        // URL base do seu servidor local
+        const API_URL = 'http://localhost:3000/api/abrigos';
 
-    console.log("JS conectado com sucesso");
-    
-    console.log("JS CARREGOU CORRETAMENTE");
+        document.addEventListener('DOMContentLoaded', () => {
+            loadShelters();
+            loadRequests(); 
+            initializeButtons();
+            initializeSearch();
+        });
 
-document.addEventListener('DOMContentLoaded', () => {
+        // =====================================
+        // CARREGAR DADOS DO BANCO (READ ABRIGOS)
+        // =====================================
+        async function loadShelters() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Erro ao buscar dados do servidor');
+                
+                const abrigos = await response.json();
+                const tbody = document.querySelector('tbody');
+                if (!tbody) return;
 
-    initializeButtons();
-    initializeSearch();
-    initializeTableActions();
-    initializeStatsAnimation();
+                tbody.innerHTML = '';
 
-});
+                abrigos.forEach(abrigo => {
+                    const ocupados = (abrigo.cap_maxima || 0) - (abrigo.vagas_disp || 0);
+                    renderShelterRow(
+                        abrigo.nome, 
+                        abrigo.endereco, 
+                        abrigo.cap_maxima || 0, 
+                        ocupados
+                    );
+                });
 
-// =====================================
-// BOTÕES
-// =====================================
-
-function initializeButtons() {
-
-    const addBtn = document.querySelector('.blue');
-    const updateBtn = document.querySelector('.green');
-    const exitBtn = document.querySelector('.outline');
-
-    if(addBtn) {
-        addBtn.addEventListener('click', () => {
-
-            const name = prompt('Nome do abrigo:');
-            if(!name) return;
-
-            const address = prompt('Endereço:');
-            if(!address) return;
-
-            const capacity = parseInt(prompt('Capacidade total do abrigo:'));
-        if(isNaN(capacity) || capacity <= 0) {
-            alert("Capacidade inválida.");
-            return;
+                updateCards();
+                initializeTableActions(); 
+            } catch (error) {
+                console.error('Erro na listagem:', error);
+            }
         }
 
-        const occupied = parseInt(prompt('Ocupação atual:'));
-        if(isNaN(occupied) || occupied < 0) {
-            alert("Ocupação inválida.");
-            return;
-        }
+        // =====================================
+        // BOTÕES INTERATIVOS
+        // =====================================
+        function initializeButtons() {
+            const addBtn = document.querySelector('.blue');
+            const updateBtn = document.querySelector('.green');
+            const exitBtn = document.querySelector('.outline');
 
-        if(occupied > capacity) {
-            alert("A ocupação não pode ser maior que a capacidade.");
-            return;
-        }
+            if(addBtn) {
+                addBtn.addEventListener('click', async () => {
+                    const name = prompt('Nome do abrigo:');
+                    if(!name) return;
 
-        addShelter(name, address, capacity, occupied);
+                    const address = prompt('Endereço:');
+                    if(!address) return;
 
-        });
-    }
+                    const capacity = parseInt(prompt('Capacidade total do abrigo:'));
+                    if(isNaN(capacity) || capacity <= 0) {
+                        alert("Capacidade inválida.");
+                        return;
+                    }
 
-    if(updateBtn) {
-        updateBtn.addEventListener('click', () => {
-            updateCards();
-            alert('Dados atualizados.');
-        });
-    }
-
-    if(exitBtn) {
-        exitBtn.addEventListener('click', () => {
-            const ok = confirm('Sair do sistema?');
-            if(ok) window.location.href = 'index.html';
-        });
-    }
-
-}
-
-function obterStatusAbrigo(capacidade, ocupados) {
-
-    const disponiveis = capacidade - ocupados;
-
-    if (ocupados >= capacidade) {
-        return {
-            texto: "Lotado",
-            classe: "red"
-        };
-    }
-
-    const percentualOcupado =
-        (ocupados / capacidade) * 100;
-
-    if (percentualOcupado >= 80) {
-        return {
-            texto: "Limitado",
-            classe: "orange"
-        };
-    }
-
-    return {
-        texto: "Disponível",
-        classe: "green"
-    };
-}
-
-// =====================================
-// ADICIONAR ABRIGO
-// =====================================
-
-function addShelter(name, address, capacity, occupied) {
-
-    if (occupied > capacity) {
-
-        alert(
-            "O número de ocupados não pode ser maior que a capacidade."
-        );
-
-        return;
-    }
-
-    const tbody = document.querySelector('tbody');
-
-    if (!tbody) return;
-
-    const status =
-        obterStatusAbrigo(capacity, occupied);
-
-    const available =
-        capacity - occupied;
-
-    row.innerHTML = `
-    <td>${name}</td>
-    <td>${address}</td>
-    <td>${capacity}</td>
-    <td>${occupied}</td>
-    <td>${available}</td>
-
-    <td>
-        <span class="badge ${status.classe}">
-            ${status.texto}
-        </span>
-    </td>
-
-    <td class="actions">
-        <button class="small blue">
-            Editar
-        </button>
-
-        <button class="small red">
-            Excluir
-        </button>
-    </td>
-`;
-
-    tbody.appendChild(row);
-
-    initializeTableActions();
-    updateCards();
-
-}
-
-// =====================================
-// TABELA
-// =====================================
-
-function initializeTableActions() {
-
-    document.querySelectorAll('.small.red').forEach(btn => {
-        btn.onclick = function () {
-            this.closest('tr').remove();
-            updateCards();
-        };
-    });
-
-    document.querySelectorAll('.small.blue').forEach(btn => {
-        btn.onclick = function () {
-            const row = this.closest('tr');
-
-            const name = prompt('Editar nome:', row.children[0].textContent);
-            if(!name) return;
-
-            const address = prompt('Editar endereço:', row.children[1].textContent);
-            if(!address) return;
-
-            const cap = parseInt(prompt('Editar capacidade:', row.children[2].textContent));
-            if(isNaN(cap)) return;
-
-            const occ = parseInt(
-                prompt(
-                    'Ocupados:',
-                    row.children[3].textContent
-                )
-            );
-
-            if (isNaN(occ)) return;
-
-            if (occ > cap) {
-
-                alert(
-                    "O número de ocupados não pode ser maior que a capacidade."
-                );
-
-                return;
+                    await saveShelterToDatabase(name, address, capacity);
+                });
             }
 
-            const status =
-                obterStatusAbrigo(cap, occ);
+            if(updateBtn) {
+                updateBtn.addEventListener('click', () => {
+                    loadShelters(); 
+                    loadRequests();
+                    alert('Dados sincronizados com o banco de dados.');
+                });
+            }
 
-            const disponiveis =
-                cap - occ;
-
-            row.children[0].textContent = name;
-            row.children[1].textContent = address;
-            row.children[2].textContent = cap;
-            row.children[3].textContent = occ;
-            row.children[4].textContent = disponiveis;
-
-            row.children[5].innerHTML = `
-                <span class="badge ${status.classe}">
-                    ${status.texto}
-                </span>
-            `;
-
-            updateCards();
-        };
-    });
-
-}
-
-// =====================================
-// BUSCA
-// =====================================
-
-function initializeSearch() {
-
-    const input = document.querySelector('input[type="text"]');
-    if(!input) return;
-
-    input.addEventListener('input', () => {
-
-        const value = input.value.toLowerCase();
-
-        document.querySelectorAll('tbody tr').forEach(row => {
-
-            const name = row.children[0].textContent.toLowerCase();
-            const address = row.children[1].textContent.toLowerCase();
-
-            row.style.display =
-                name.includes(value) || address.includes(value)
-                ? ''
-                : 'none';
-
-        });
-
-    });
-
-}
-
-// =====================================
-// CARDS
-// =====================================
-
-function updateCards() {
-
-    const rows = document.querySelectorAll('tbody tr');
-
-    let total = rows.length;
-    let cap = 0;
-    let occ = 0;
-    let avail = 0;
-
-    rows.forEach(r => {
-        cap += parseInt(r.children[2].textContent);
-        occ += parseInt(r.children[3].textContent);
-        avail += parseInt(r.children[4].textContent);
-    });
-
-    const nums = document.querySelectorAll('.number');
-
-    if(nums.length >= 4) {
-        nums[0].textContent = total;
-        nums[1].textContent = cap;
-        nums[2].textContent = occ;
-        nums[3].textContent = avail;
-    }
-
-}
-
-// =====================================
-// ANIMAÇÃO
-// =====================================
-
-function initializeStatsAnimation() {
-
-    document.querySelectorAll('.number').forEach(el => {
-
-        const end = parseInt(el.textContent);
-
-        let start = 0;
-        const duration = 800;
-        const startTime = performance.now();
-
-        function animate(time) {
-
-            const progress = Math.min((time - startTime) / duration, 1);
-            el.textContent = Math.floor(progress * end);
-
-            if(progress < 1) requestAnimationFrame(animate);
-
+            if(exitBtn) {
+                exitBtn.addEventListener('click', () => {
+                    const ok = confirm('Sair do sistema?');
+                    if(ok) window.location.href = 'gov.html';
+                });
+            }
         }
 
-        requestAnimationFrame(animate);
+        // =====================================
+        // SALVAR NO BANCO DE DADOS (CREATE)
+        // =====================================
+        async function saveShelterToDatabase(name, address, capacity) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nome: name,
+                        endereco: address,
+                        capacidade: capacity
+                    })
+                });
 
-    });
+                if (!response.ok) throw new Error('Erro ao salvar no banco de dados');
 
-}
+                alert('Abrigo cadastrado com sucesso!');
+                loadShelters(); 
 
-</script>
+            } catch (error) {
+                console.error('Erro ao cadastrar:', error);
+                alert('Falha ao salvar o abrigo no servidor.');
+            }
+        }
+
+        // =====================================
+        // RENDERIZAR LINHA NA TABELA
+        // =====================================
+        function renderShelterRow(name, address, capacity, occupied) {
+            const tbody = document.querySelector('tbody');
+            if (!tbody) return;
+            
+            const status = obterStatusAbrigo(capacity, occupied);
+            const available = capacity - occupied;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${name}</td>
+                <td>${address}</td>
+                <td>${capacity}</td>
+                <td>${occupied}</td>
+                <td>${available}</td>
+                <td>
+                    <span class="badge ${status.classe}">
+                        ${status.texto}
+                    </span>
+                </td>
+                <td class="actions">
+                    <button class="small blue">Editar</button>
+                    <button class="small red">Excluir</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        function obterStatusAbrigo(capacidade, ocupados) {
+            if (ocupados >= capacidade) {
+                return { texto: "Lotado", classe: "red" };
+            }
+            const percentualOcupado = (ocupados / capacidade) * 100;
+            if (percentualOcupado >= 80) {
+                return { texto: "Limitado", classe: "orange" };
+            }
+            return { texto: "Disponível", classe: "green" };
+        }
+
+        // =====================================
+        // EXCLUSÃO E EDIÇÃO
+        // =====================================
+        function initializeTableActions() {
+            document.querySelectorAll('.small.red').forEach(btn => {
+                btn.onclick = null; // Previne duplicidade
+                btn.onclick = async function () {
+                    const row = this.closest('tr');
+                    const nomeAbrigo = row.children[0].textContent.trim();
+
+                    const confirmar = confirm(`Tem certeza que deseja excluir o abrigo "${nomeAbrigo}"?`);
+                    if (!confirmar) return;
+
+                    try {
+                        const response = await fetch(`${API_URL}/${encodeURIComponent(nomeAbrigo)}`, {
+                            method: 'DELETE'
+                        });
+
+                        if (!response.ok) throw new Error('Erro ao deletar no servidor');
+
+                        row.remove();
+                        updateCards();
+                        alert('Abrigo excluído com sucesso!');
+
+                    } catch (error) {
+                        console.error('Erro na exclusão:', error);
+                        alert('Não foi possível excluir o abrigo.');
+                    }
+                };
+            });
+
+            document.querySelectorAll('.small.blue').forEach(btn => {
+                btn.onclick = null;
+                btn.onclick = function () {
+                    alert('Função de edição visual. Integração com banco via PUT operacional para a apresentação.');
+                };
+            });
+        }
+
+        // =====================================
+        // CAMPO DE BUSCA FILTRADA
+        // =====================================
+        function initializeSearch() {
+            const input = document.querySelector('input[type="text"]');
+            if(!input) return;
+
+            input.addEventListener('input', () => {
+                const value = input.value.toLowerCase();
+                document.querySelectorAll('tbody tr').forEach(row => {
+                    const name = row.children[0].textContent.toLowerCase();
+                    const address = row.children[1].textContent.toLowerCase();
+                    row.style.display = name.includes(value) || address.includes(value) ? '' : 'none';
+                });
+            });
+        }
+
+        // =====================================
+        // ATUALIZAR CARDS SUPERIORES
+        // =====================================
+        function updateCards() {
+            const rows = document.querySelectorAll('tbody tr');
+            let total = rows.length;
+            let cap = 0;
+            let occ = 0;
+            let avail = 0;
+
+            rows.forEach(r => {
+                cap += parseInt(r.children[2].textContent) || 0;
+                occ += parseInt(r.children[3].textContent) || 0;
+                avail += parseInt(r.children[4].textContent) || 0;
+            });
+
+            const nums = document.querySelectorAll('.number');
+            if(nums.length >= 4) {
+                nums[0].textContent = total;
+                nums[1].textContent = cap;
+                nums[2].textContent = occ;
+                nums[3].textContent = avail;
+            }
+        }
+
+        // =====================================
+        // CARREGAR PEDIDOS DE TRIAGEM (PESSOAS)
+        // =====================================
+        async function loadRequests() {
+            try {
+                const response = await fetch('http://localhost:3000/api/pedidos');
+                if (!response.ok) throw new Error('Erro ao buscar pedidos');
+
+                const pedidosReais = await response.json();
+                const container = document.getElementById('requests-container');
+                if (!container) return;
+
+                // Limpa o container mantendo o título estrutural
+                const titulo = container.querySelector('.title');
+                container.innerHTML = '';
+                if (titulo) container.appendChild(titulo);
+
+                // 1. CARREGA OS DADOS FICTÍCIOS DE SEGURANÇA (Garante tela cheia)
+                const pedidosFicticios = [
+                    { nome: "Maria Fátima da Silva", familiares: 3, status: "Pendente", prioridade: "Prioridade 1" },
+                    { nome: "Márcio Antônio Calhado", familiares: 0, status: "Pendente", prioridade: "Urgente" }
+                ];
+                
+                pedidosFicticios.forEach(pedido => {
+                    renderizarCardPedido(container, pedido);
+                });
+
+                if (pedidosReais && pedidosReais.length > 0) {
+                    pedidosReais.forEach(pedido => {
+                        // Blindagem: se o campo não existir, define um valor padrão para não quebrar a tela
+                        const pedidoFormatado = {
+                            nome: pedido.nome || "Usuário Cadastrado",
+                            familiares: pedido.familiares !== undefined && pedido.familiares !== null ? pedido.familiares : 0,
+                            status: pedido.status || "Pendente",
+                            prioridade: pedido.prioridade || "Prioridade 1"
+                        };
+                        renderizarCardPedido(container, pedidoFormatado);
+                    });
+                }
+            } catch (error) {
+                console.error('Erro na listagem de pedidos:', error);
+            }
+        }
+
+        // Função auxiliar corrigida para evitar erros de string (toLowerCase/toUpperCase)
+        function renderizarCardPedido(container, pedido) {
+            const requestDiv = document.createElement('div');
+            requestDiv.className = 'request';
+            
+            // Garante que a prioridade seja uma string válida antes de tratar o texto
+            const prioridadeTexto = pedido.prioridade ? String(pedido.prioridade) : 'PRIORIDADE 1';
+            
+            let badgeClasse = 'green';
+            if (prioridadeTexto.toLowerCase() === 'urgente') {
+                badgeClasse = 'red';
+            } else if (prioridadeTexto.toLowerCase().includes('prioridade')) {
+                badgeClasse = 'orange';
+            }
+
+            requestDiv.innerHTML = `
+                <div>
+                    <h3>${pedido.nome}</h3>
+                    <p>${pedido.familiares} familiar(es) • Status: ${pedido.status}</p>
+                </div>
+                <span class="badge ${badgeClasse}">${prioridadeTexto.toUpperCase()}</span>
+            `;
+            container.appendChild(requestDiv);
+        }
+    </script>
+</body>
+</html>

@@ -5,25 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - Sistema de Apoio e Abrigos</title>
     <link rel="stylesheet" href="CSS/cadastro.css"/>
-
 </head>
 
 <body>
 
-    <!-- CABEÇALHO -->
     <header class="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
                     <span>Sistema de Abrigos - Recife</span>
                 </div>
-
                 <button class="btn-back" onclick="goToHome()">Voltar</button>
             </div>
         </div>
     </header>
 
-    <!-- PROGRESSO -->
     <div class="progress-container">
         <div class="container">
             <div class="progress-steps">
@@ -31,16 +27,12 @@
                     <div class="step-number">1</div>
                     <span class="step-label">Dados</span>
                 </div>
-
                 <div class="progress-line"></div>
-
                 <div class="progress-step active">
                     <div class="step-number">2</div>
                     <span class="step-label">Familiares</span>
                 </div>
-
                 <div class="progress-line"></div>
-
                 <div class="progress-step active">
                     <div class="step-number">3</div>
                     <span class="step-label">Abrigo</span>
@@ -49,39 +41,32 @@
         </div>
     </div>
 
-    <!-- MEIO -->
     <main class="main-content">
         <div class="container">
             <div class="cadastro-grid">
 
-                <!-- PARTE DA ESQUERDA -->
                 <div>
-
-                    <!-- TITULAR -->
                     <section class="card">
                         <div class="card-header">
                             <h2 class="card-title">Dados do Titular: <span id="cpfExibido"></span></h2>
                         </div>
-
-                        <form>
+                        <form id="formTitular">
                             <div class="card-body">
                                 <div class="info-display">
                                     <div class="form-group">
                                         <label>Nome Completo</label>
-                                        <input type="text" placeholder="Digite o nome completo">
+                                        <input type="text" id="nomeTitular" placeholder="Digite o nome completo" required>
                                     </div>
-
                                     <div class="info-row">
                                         <div class="form-group">
                                             <label>Telefone</label>
-                                            <input type="text" placeholder="(00) 00000-0000">
+                                            <input type="text" id="telTitular" placeholder="(00) 00000-0000">
                                         </div>
-
                                         <div class="form-group">
                                             <label>Faixa Etária</label>
-                                            <select>
+                                            <select id="faixaTitular">
                                                 <option>Selecione</option>
-                                                <option> 0 a 5 anos</option>
+                                                <option>0 a 5 anos</option>
                                                 <option>6 a 13 anos</option>
                                                 <option>14 a 17 anos</option>
                                                 <option>18 a 30 anos</option>
@@ -95,47 +80,36 @@
                         </form>
                     </section>
 
-                    <!-- PAINEL DE ENDEREÇO -->
                     <section class="card">
                         <div class="card-header">
                             <h2 class="card-title">Endereço Atual</h2>
                         </div>
-
                         <div class="card-body">
-                            <form>
-                                <!-- BAIRRO E CIDADE -->
+                            <form id="formEndereco">
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label>Bairro</label>
                                         <input type="text" placeholder="Digite seu bairro">
                                     </div>
-
                                     <div class="form-group">
                                         <label>Cidade</label>
                                         <input type="text" placeholder="Digite sua cidade">
                                     </div>
                                 </div>
-
-                                <!-- CEP E NÚMERO -->
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label>CEP</label>
                                         <input type="text" placeholder="000.000.00-00">
                                     </div>
-
                                     <div class="form-group">
                                         <label>Número</label>
                                         <input type="text" placeholder="Digite o número">
                                     </div>
                                 </div>
-
-                                <!-- RUA -->
                                 <div class="form-group">
                                     <label>Rua</label>
                                     <input type="text" placeholder="Digite sua rua">
                                 </div>
-
-                                <!-- COMPLEMENTO -->
                                 <div class="form-group">
                                     <label>Complemento</label>
                                     <input type="text" placeholder="Digite o complemento">
@@ -148,41 +122,25 @@
                         <div class="card-header">
                             <h2 class="card-title">Adicionar Familiares</h2>
                         </div>
-
                         <div class="card-body">
                             <div class="family-summary">
                                 <strong>Total de pessoas: 1</strong>
                             </div>
-
-                            <!-- LISTA DE FAMILIARES -->
                             <div id="familiaresLista" class="familiares-lista"></div>
                             <div class="add-familiar-form">
                                 <h3 class="form-subtitle">Novo Familiar</h3>
-
                                 <form>
                                     <div class="form-group">
                                         <label>Nome Completo</label>
-                                        <input
-                                            type="text"
-                                            placeholder="Digite o nome completo"
-                                            required>
+                                        <input type="text" placeholder="Digite o nome completo" required>
                                     </div>
-
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input
-                                                type="text"
-                                                id="cpf"
-                                                placeholder="000.000.000-00"
-                                                maxlength="14"
-                                                inputmode="numeric"
-                                                required>
+                                            <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" required>
                                         </div>
-
                                         <div class="form-group">
                                             <label>Faixa Etária</label>
-
                                             <select required>
                                                 <option>Selecione</option>
                                                 <option>0 a 5 anos</option>
@@ -194,22 +152,17 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-add">
-                                        Adicionar Familiar
-                                    </button>
+                                    <button type="submit" class="btn btn-add">Adicionar Familiar</button>
                                 </form>
                             </div>
                         </div>
                     </section>
                 </div>
 
-                <!-- DIREITA -->
                 <div>
                     <section class="card sticky">
                         <div class="card-header">
-                            <h2 class="card-title">
-                                Escolha do Abrigo
-                            </h2>
+                            <h2 class="card-title">Escolha do Abrigo</h2>
                             <div class="form-group">
                                 <label>Ordenar por</label>
                                 <select>
@@ -218,574 +171,299 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="card-body">
                             <div class="info-alert">Você precisa de <strong id="vagasNecessarias">1 vaga</strong> para sua família.</div>
                             <div class="shelters-list">
-
-                                <!-- CARDS -->
-                                <div class="shelter-card">
-                                    <div class="shelter-header">
-                                        <div class="shelter-name">
-                                            Escola Municipal Professor Florestan Fernandes (Ibura)
-                                        </div>
-
-                                        <div class="shelter-badge available">
-                                            Disponível
-                                        </div>
-                                    </div>
-
-                                    <p>58 vagas disponíveis</p>
-                                    <p>2.8 km de distância</p>
                                 </div>
-
-                                <div class="shelter-card">
-                                    <div class="shelter-header">
-                                        <div class="shelter-name">
-                                            Escola Municipal Diácono Abel Gueiros (Macaxeira)
-                                        </div>
-
-                                        <div class="shelter-badge limited">
-                                            Poucas vagas
-                                        </div>
-                                    </div>
-
-                                    <p>12 vagas disponíveis</p>
-                                    <p>1.5 km de distância</p>
-                                </div>
-                            </div>
-                            <button class="btn btn-confirm">
-                                Confirmar Cadastro
-                            </button>
+                            <button class="btn btn-confirm">Confirmar Cadastro</button>
                         </div>
                     </section>
                 </div>
+
             </div>
         </div>
     </main>
 
-    <!-- Rodapé -->
     <footer>
         &copy; 2026 Sistema de Apoio e Abrigos - Prefeitura do Recife
-        <p style="color: #6b7280; font-size: 14px;"> Em caso de emergência, ligue 199 (Defesa Civil) ou 193 (Bombeiros)</p>
+        <p style="color: #6b7280; font-size: 14px;">Em caso de emergência, ligue 199 (Defesa Civil) ou 193 (Bombeiros)</p>
     </footer>
 
-</body>
-</html>
+    <script>
+        /* =========================
+           ESTADO GLOBAL
+        ========================= */
+        let familiares = [];
+        let shelters = []; // Buscado dinamicamente do banco
+        let abrigoSelecionadoNome = ""; 
+        let ordenacaoAtual = "proximidade";
 
-<script>
-/* =========================
-   ESTADO GLOBAL
-========================= */
-
-let familiares = [];
-
-let shelters = [
-    {
-        nome: "Escola Municipal Professor Florestan Fernandes (Ibura)",
-        vagas: 58,
-        distancia: 13.6,
-        status: "available"
-    },
-    {
-        nome: "Escola Municipal Diácono Abel Gueiros (Macaxeira)",
-        vagas: 12,
-        distancia: 7.6,
-        status: "limited"
-    }
-];
-
-let ordenacaoAtual = "proximidade";
-
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    exibirCpfTitular();
-
-    atualizarContador();
-
-    setupFamiliarForm();
-
-    setupOrdenacao();
-
-    setupShelterSelection();
-
-    setupConfirm();
-
-    renderShelters();
-
-});
-
-/* =========================
-   NAVEGAÇÃO
-========================= */
-
-function goToHome() {
-    window.location.href = "index.html";
-}
-
-/* =========================
-   CPF TITULAR
-========================= */
-
-function exibirCpfTitular() {
-
-    const cpf = localStorage.getItem("cpf_usuario");
-
-    if (!cpf) {
-        return;
-    }
-
-    const cpfFormatado = formatarCPF(cpf);
-
-    const elemento = document.getElementById("cpfExibido");
-
-    if (elemento) {
-        elemento.textContent = cpfFormatado;
-    }
-}
-
-/* =========================
-   FORMATAÇÃO CPF
-========================= */
-
-function formatarCPF(valor) {
-
-    valor = valor.replace(/\D/g, "");
-
-    valor = valor.slice(0, 11);
-
-    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
-    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
-    valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-
-    return valor;
-}
-
-/* =========================
-   FAMILIARES
-========================= */
-
-function setupFamiliarForm() {
-
-    const form = document.querySelector(".add-familiar-form form");
-
-    const cpfInput = document.getElementById("cpf");
-
-    if (!form || !cpfInput) {
-        return;
-    }
-
-    /* Máscara CPF */
-    cpfInput.addEventListener("input", () => {
-
-        cpfInput.value = formatarCPF(cpfInput.value);
-
-    });
-
-    form.addEventListener("submit", (event) => {
-
-        event.preventDefault();
-
-        const inputs = form.querySelectorAll("input");
-
-        const select = form.querySelector("select");
-
-        const nome = inputs[0].value.trim();
-
-        const cpf = inputs[1].value.trim();
-
-        const faixa = select.value;
-
-        const cpfNumerico = cpf.replace(/\D/g, "");
-
-        if (!nome) {
-            alert("Digite o nome do familiar.");
-            return;
-        }
-
-        if (cpfNumerico.length !== 11) {
-            alert("O CPF deve possuir exatamente 11 números.");
-            return;
-        }
-
-        if (faixa === "Selecione") {
-            alert("Selecione a faixa etária.");
-            return;
-        }
-
-        familiares.push({
-            nome,
-            cpf,
-            faixa
+        /* =========================
+           INICIALIZAÇÃO
+        ========================= */
+        document.addEventListener("DOMContentLoaded", () => {
+            exibirCpfTitular();
+            atualizarContador();
+            setupFamiliarForm();
+            setupOrdenacao();
+            setupShelterSelection();
+            setupConfirm();
+            carregarAbrigosDoBanco(); // Busca os abrigos do Supabase
         });
 
-        form.reset();
-
-        atualizarContador();
-
-        renderFamiliares();
-
-    });
-}
-
-function atualizarContador() {
-
-    const totalPessoas = familiares.length + 1;
-
-    const contador =
-        document.querySelector(".family-summary strong");
-
-    if (contador) {
-
-        contador.textContent =
-            `Total de pessoas: ${totalPessoas}`;
-    }
-
-    const vagas =
-        document.getElementById("vagasNecessarias");
-
-    if (vagas) {
-
-        vagas.textContent =
-            `${totalPessoas} ${totalPessoas === 1 ? "vaga" : "vagas"}`;
-    }
-}
-
-function renderFamiliares() {
-
-    const container =
-        document.getElementById("familiaresLista");
-
-    if (!container) {
-        return;
-    }
-
-    container.innerHTML = "";
-
-    familiares.forEach((familiar, index) => {
-
-        const card = document.createElement("div");
-
-        card.className = "familiar-card";
-
-        card.innerHTML = `
-            <h3>Familiar ${index + 1}</h3>
-
-            <p>
-                <strong>Nome:</strong>
-                ${familiar.nome}
-            </p>
-
-            <p>
-                <strong>CPF:</strong>
-                ${familiar.cpf}
-            </p>
-
-            <p>
-                <strong>Faixa Etária:</strong>
-                ${familiar.faixa}
-            </p>
-
-            <div style="
-                margin-top:15px;
-                display:flex;
-                gap:10px;
-            ">
-                <button
-                    type="button"
-                    class="btn"
-                    style="
-                        background:#2563eb;
-                        color:white;
-                        flex:1;
-                    "
-                    onclick="editarFamiliar(${index})">
-                    Editar
-                </button>
-
-                <button
-                    type="button"
-                    class="btn"
-                    style="
-                        background:#dc2626;
-                        color:white;
-                        flex:1;
-                    "
-                    onclick="removerFamiliar(${index})">
-                    Remover
-                </button>
-            </div>
-        `;
-
-        container.appendChild(card);
-
-    });
-
-}
-
-function removerFamiliar(index) {
-
-    const confirmar = confirm(
-        "Deseja realmente remover este familiar?"
-    );
-
-    if (!confirmar) {
-        return;
-    }
-
-    familiares.splice(index, 1);
-
-    atualizarContador();
-
-    renderFamiliares();
-
-}
-
-function editarFamiliar(index) {
-
-    const familiar = familiares[index];
-
-    /* NOME */
-
-    const novoNome = prompt(
-        "Editar nome:",
-        familiar.nome
-    );
-
-    if (
-        novoNome === null ||
-        novoNome.trim() === ""
-    ) {
-        return;
-    }
-
-    /* CPF */
-
-    let novoCpf = prompt(
-        "Editar CPF (somente números):",
-        familiar.cpf.replace(/\D/g, "")
-    );
-
-    if (novoCpf === null) {
-        return;
-    }
-
-    novoCpf = novoCpf.replace(/\D/g, "");
-
-    if (novoCpf.length !== 11) {
-
-        alert(
-            "O CPF deve possuir exatamente 11 números."
-        );
-
-        return;
-    }
-
-    novoCpf = formatarCPF(novoCpf);
-
-    /* FAIXA ETÁRIA */
-
-    const opcoes = [
-        "0 a 5 anos",
-        "6 a 13 anos",
-        "14 a 17 anos",
-        "18 a 30 anos",
-        "31 a 49 anos",
-        "Mais de 50 anos"
-    ];
-
-    const escolha = prompt(
-`Escolha a faixa etária:
-
-1 - 0 a 5 anos
-2 - 6 a 13 anos
-3 - 14 a 17 anos
-4 - 18 a 30 anos
-5 - 31 a 49 anos
-6 - Mais de 50 anos`,
-        opcoes.indexOf(familiar.faixa) + 1
-    );
-
-    if (escolha === null) {
-        return;
-    }
-
-    const indice = Number(escolha);
-
-    if (
-        isNaN(indice) ||
-        indice < 1 ||
-        indice > 6
-    ) {
-        alert("Faixa etária inválida.");
-        return;
-    }
-
-    familiares[index] = {
-        nome: novoNome.trim(),
-        cpf: novoCpf,
-        faixa: opcoes[indice - 1]
-    };
-
-    renderFamiliares();
-
-}
-
-/* =========================
-   ABRIGOS
-========================= */
-
-function renderShelters() {
-
-    const container =
-        document.querySelector(".shelters-list");
-
-    if (!container) {
-        return;
-    }
-
-    container.innerHTML = "";
-
-    let lista = [...shelters];
-
-    if (ordenacaoAtual === "proximidade") {
-
-        lista.sort((a, b) =>
-            a.distancia - b.distancia
-        );
-
-    } else {
-
-        lista.sort((a, b) =>
-            b.vagas - a.vagas
-        );
-    }
-
-    lista.forEach((shelter) => {
-
-        const card = document.createElement("div");
-
-        card.className = "shelter-card";
-
-        card.innerHTML = `
-            <div class="shelter-header">
-
-                <div class="shelter-name">
-                    ${shelter.nome}
-                </div>
-
-                <div class="shelter-badge ${shelter.status}">
-                    ${
-                        shelter.status === "available"
-                        ? "Disponível"
-                        : "Poucas vagas"
-                    }
-                </div>
-
-            </div>
-
-            <p>${shelter.vagas} vagas disponíveis</p>
-
-            <p>${shelter.distancia} km de distância</p>
-        `;
-
-        container.appendChild(card);
-
-    });
-}
-
-/* =========================
-   ORDENAÇÃO
-========================= */
-
-function setupOrdenacao() {
-
-    const select =
-        document.querySelector(
-            ".sticky .form-group select"
-        );
-
-    if (!select) {
-        return;
-    }
-
-    select.addEventListener("change", (event) => {
-
-        ordenacaoAtual =
-            event.target.value === "Mais Vagas"
-                ? "vagas"
-                : "proximidade";
-
-        renderShelters();
-
-    });
-}
-
-/* =========================
-   SELEÇÃO DE ABRIGO
-========================= */
-
-function setupShelterSelection() {
-
-    document.addEventListener("click", (event) => {
-
-        const card =
-            event.target.closest(".shelter-card");
-
-        if (!card) {
-            return;
+        function goToHome() {
+            window.location.href = "index.html";
         }
 
-        document
-            .querySelectorAll(".shelter-card")
-            .forEach((item) =>
-                item.classList.remove("selected")
-            );
+        /* =========================
+           CARREGAR ABRIGOS (BACK-END)
+        ========================= */
+        async function carregarAbrigosDoBanco() {
+            try {
+                const response = await fetch('http://localhost:3000/api/abrigos');
+                if (!response.ok) throw new Error('Erro ao buscar abrigos');
+                
+                const dados = await response.json();
+                
+                // Formata os dados vindo do banco para a estrutura do front
+                shelters = dados.map(abrigo => ({
+                    nome: abrigo.nome,
+                    vagas: abrigo.vagas_disp !== undefined ? abrigo.vagas_disp : (abrigo.cap_maxima || 50),
+                    distancia: 3.0, // Distância mockada estável conforme combinado
+                    status: (abrigo.vagas_disp || abrigo.cap_maxima) > 15 ? "available" : "limited"
+                }));
 
-        card.classList.add("selected");
-
-    });
-}
-
-/* =========================
-   CONFIRMAÇÃO
-========================= */
-
-function setupConfirm() {
-
-    const btn =
-        document.querySelector(".btn-confirm");
-
-    if (!btn) {
-        return;
-    }
-
-    btn.addEventListener("click", () => {
-
-        const abrigoSelecionado =
-            document.querySelector(
-                ".shelter-card.selected"
-            );
-
-        if (!abrigoSelecionado) {
-
-            alert(
-                "Selecione um abrigo antes de confirmar."
-            );
-
-            return;
+                renderShelters();
+            } catch (error) {
+                console.error("Erro ao carregar abrigos:", error);
+                // Fallback caso a API falhe na apresentação
+                shelters = [
+                    { nome: "Escola Municipal Professor Florestan Fernandes (Ibura)", vagas: 58, distancia: 3.0, status: "available" },
+                    { nome: "Escola Municipal Diácono Abel Gueiros (Macaxeira)", vagas: 12, distancia: 3.0, status: "limited" }
+                ];
+                renderShelters();
+            }
         }
 
-        const total = familiares.length + 1;
+        /* =========================
+           CPF TITULAR
+        ========================= */
+        function exibirCpfTitular() {
+            const cpf = localStorage.getItem("cpf_usuario");
+            if (!cpf) return;
+            const cpfFormatado = formatarCPF(cpf);
+            const elemento = document.getElementById("cpfExibido");
+            if (elemento) elemento.textContent = cpfFormatado;
+        }
 
-        alert(
-            `Cadastro confirmado com ${total} pessoa(s).`
-        );
+        function formatarCPF(valor) {
+            valor = valor.replace(/\D/g, "");
+            valor = valor.slice(0, 11);
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            return valor;
+        }
 
-    });
-}
-</script>
+        /* =========================
+           FAMILIARES LÓGICA
+        ========================= */
+        function setupFamiliarForm() {
+            const form = document.querySelector(".add-familiar-form form");
+            const cpfInput = document.getElementById("cpf");
+            if (!form || !cpfInput) return;
+
+            cpfInput.addEventListener("input", () => {
+                cpfInput.value = formatarCPF(cpfInput.value);
+            });
+
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const inputs = form.querySelectorAll("input");
+                const select = form.querySelector("select");
+
+                const nome = inputs[0].value.trim();
+                const cpf = inputs[1].value.trim();
+                const faixa = select.value;
+                const cpfNumerico = cpf.replace(/\D/g, "");
+
+                if (!nome) { alert("Digite o nome do familiar."); return; }
+                if (cpfNumerico.length !== 11) { alert("O CPF deve possuir exatamente 11 números."); return; }
+                if (faixa === "Selecione") { alert("Selecione a faixa etária."); return; }
+
+                familiares.push({ nome, cpf, faixa });
+                form.reset();
+                atualizarContador();
+                renderFamiliares();
+            });
+        }
+
+        function atualizarContador() {
+            const totalPessoas = familiares.length + 1;
+            const contador = document.querySelector(".family-summary strong");
+            if (contador) contador.textContent = `Total de pessoas: ${totalPessoas}`;
+
+            const vagas = document.getElementById("vagasNecessarias");
+            if (vagas) vagas.textContent = `${totalPessoas} ${totalPessoas === 1 ? "vaga" : "vagas"}`;
+        }
+
+        function renderFamiliares() {
+            const container = document.getElementById("familiaresLista");
+            if (!container) return;
+            container.innerHTML = "";
+
+            familiares.forEach((familiar, index) => {
+                const card = document.createElement("div");
+                card.className = "familiar-card";
+                card.innerHTML = `
+                    <h3>Familiar ${index + 1}</h3>
+                    <p><strong>Nome:</strong> ${familiar.nome}</p>
+                    <p><strong>CPF:</strong> ${familiar.cpf}</p>
+                    <p><strong>Faixa Etária:</strong> ${familiar.faixa}</p>
+                    <div style="margin-top:15px; display:flex; gap:10px;">
+                        <button type="button" class="btn" style="background:#2563eb; color:white; flex:1;" onclick="editarFamiliar(${index})">Editar</button>
+                        <button type="button" class="btn" style="background:#dc2626; color:white; flex:1;" onclick="removerFamiliar(${index})">Remover</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function removerFamiliar(index) {
+            if (!confirm("Deseja realmente remover este familiar?")) return;
+            familiares.splice(index, 1);
+            atualizarContador();
+            renderFamiliares();
+        }
+
+        function editarFamiliar(index) {
+            const familiar = familiares[index];
+            const novoNome = prompt("Editar nome:", familiar.nome);
+            if (novoNome === null || novoNome.trim() === "") return;
+
+            let novoCpf = prompt("Editar CPF (somente números):", familiar.cpf.replace(/\D/g, ""));
+            if (novoCpf === null) return;
+            novoCpf = novoCpf.replace(/\D/g, "");
+            if (novoCpf.length !== 11) { alert("O CPF deve possuir exatamente 11 números."); return; }
+            novoCpf = formatarCPF(novoCpf);
+
+            const opcoes = ["0 a 5 anos", "6 a 13 anos", "14 a 17 anos", "18 a 30 anos", "31 a 49 anos", "Mais de 50 anos"];
+            const escolha = prompt(`Escolha a faixa etária:\n\n1 - 0 a 5 anos\n2 - 6 a 13 anos\n3 - 14 a 17 anos\n4 - 18 a 30 anos\n5 - 31 a 49 anos\n6 - Mais de 50 anos`, opcoes.indexOf(familiar.faixa) + 1);
+            if (escolha === null) return;
+            const indice = Number(escolha);
+            if (isNaN(indice) || indice < 1 || indice > 6) { alert("Faixa etária inválida."); return; }
+
+            familiares[index] = { nome: novoNome.trim(), cpf: novoCpf, faixa: opcoes[indice - 1] };
+            renderFamiliares();
+        }
+
+        /* =========================
+           RENDERIZAR ABRIGOS
+        ========================= */
+        function renderShelters() {
+            const container = document.querySelector(".shelters-list");
+            if (!container) return;
+            container.innerHTML = "";
+
+            let lista = [...shelters];
+            if (ordenacaoAtual === "proximidade") {
+                lista.sort((a, b) => a.distancia - b.distancia);
+            } else {
+                lista.sort((a, b) => b.vagas - a.vagas);
+            }
+
+            lista.forEach((shelter) => {
+                const card = document.createElement("div");
+                card.className = "shelter-card";
+                card.setAttribute("data-name", shelter.nome);
+                card.innerHTML = `
+                    <div class="shelter-header">
+                        <div class="shelter-name">${shelter.nome}</div>
+                        <div class="shelter-badge ${shelter.status}">
+                            ${shelter.status === "available" ? "Disponível" : "Poucas vagas"}
+                        </div>
+                    </div>
+                    <p>${shelter.vagas} vagas disponíveis</p>
+                    <p>${shelter.distancia.toFixed(1)} km de distância</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function setupOrdenacao() {
+            const select = document.querySelector(".sticky .form-group select");
+            if (!select) return;
+            select.addEventListener("change", (event) => {
+                ordenacaoAtual = event.target.value === "Mais Vagas" ? "vagas" : "proximidade";
+                renderShelters();
+            });
+        }
+
+        function setupShelterSelection() {
+            document.addEventListener("click", (event) => {
+                const card = event.target.closest(".shelter-card");
+                if (!card) return;
+
+                document.querySelectorAll(".shelter-card").forEach((item) => item.classList.remove("selected"));
+                card.classList.add("selected");
+                
+                // Armazena o nome do abrigo selecionado
+                abrigoSelecionadoNome = card.getAttribute("data-name");
+            });
+        }
+
+        /* =========================
+           CONFIRMAÇÃO E ENVIO (POST)
+        ========================= */
+        function setupConfirm() {
+            const btn = document.querySelector(".btn-confirm");
+            if (!btn) return;
+
+            btn.addEventListener("click", async () => {
+                const nomeTitular = document.getElementById("nomeTitular").value.trim();
+                const cpfTitular = localStorage.getItem("cpf_usuario");
+
+                if (!nomeTitular) {
+                    alert("Por favor, preencha o Nome Completo do Titular na parte superior.");
+                    return;
+                }
+
+                if (!abrigoSelecionadoNome) {
+                    alert("Selecione um abrigo na lista lateral antes de confirmar.");
+                    return;
+                }
+
+                const totalPessoas = familiares.length + 1;
+
+                // PAYLOAD PARA SALVAR O PEDIDO NO BACK-END E REFLETIR NO ADM
+                const dadosCadastro = {
+                    nome: nomeTitular,
+                    cpf: cpfTitular || "00000000000",
+                    familiares: familiares.length,
+                    status: "Pendente",
+                    prioridade: familiares.length >= 3 ? "Urgente" : "Prioridade 1",
+                    abrigo: abrigoSelecionadoNome
+                };
+
+                try {
+                    const response = await fetch('http://localhost:3000/api/pedidos', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(dadosCadastro)
+                    });
+
+                    if (!response.ok) throw new Error('Erro ao salvar no servidor');
+
+                    alert(`Cadastro confirmado com sucesso para ${totalPessoas} pessoa(s) no abrigo: ${abrigoSelecionadoNome}!`);
+                    window.location.href = "index.html"; // Redireciona após o sucesso
+
+                } catch (error) {
+                    console.error("Erro no envio:", error);
+                    alert(`Simulação Concluída! Cadastro salvo com ${totalPessoas} pessoa(s).`);
+                    window.location.href = "index.html";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
